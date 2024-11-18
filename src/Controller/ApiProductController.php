@@ -6,9 +6,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Request;
-use App\Entity\Product;
+
 use App\Repository\ProductRepository;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\VilleRepository;
+use App\Repository\VilleRepositoryRepository;
 use App\Utils\Utils;
 
 class ApiProductController extends AbstractController
@@ -27,5 +28,13 @@ class ApiProductController extends AbstractController
         $response =new Utils();
        $produits = $productRepository->findAll();
        return $response->GetJsonResponse($request,$produits);
+    }
+
+    #[Route('/api/villes', name: 'app_api_villes')]
+    public function getVilles(Request $request,VilleRepository $villeRepository)
+    {
+        $response =new Utils();
+       $villes = $villeRepository->findAll();
+       return $response->GetJsonResponse($request,$villes);
     }
 }
