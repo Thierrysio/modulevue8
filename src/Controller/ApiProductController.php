@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\FournisseurRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -9,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 use App\Repository\ProductRepository;
 use App\Repository\VilleRepository;
-use App\Repository\VilleRepositoryRepository;
+
 use App\Utils\Utils;
 
 class ApiProductController extends AbstractController
@@ -36,5 +37,12 @@ class ApiProductController extends AbstractController
         $response =new Utils();
        $villes = $villeRepository->findAll();
        return $response->GetJsonResponse($request,$villes);
+    }
+    #[Route('/api/fournisseurs', name: 'app_api_fournisseurs')]
+    public function getFournisseurs(Request $request,FournisseurRepository $fournisseurRepository)
+    {
+        $response =new Utils();
+       $fournisseurs = $fournisseurRepository->findAll();
+       return $response->GetJsonResponse($request,$fournisseurs);
     }
 }

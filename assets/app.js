@@ -13,7 +13,9 @@ import { createApp } from 'vue';
 import HelloWorld from './composants/test.vue';
 import GetProducts from './composants/ProductApp.vue';
 import GetVilles from './composants/VilleApp.vue';
+import GetFournisseurs from './composants/FournisseurApp.vue';
 
 createApp(HelloWorld).mount('#app');
 createApp(GetProducts).mount('#app2');
 createApp(GetVilles).mount('#app3');
+createApp(GetFournisseurs).mount('#app4');
