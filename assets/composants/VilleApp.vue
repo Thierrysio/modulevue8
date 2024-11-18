@@ -6,15 +6,13 @@
           <div>ID</div>
           <div>Nom</div>
           <div>Pays</div>
-          <div>Actions</div>
+         
         </div>
         <div class="table-row" v-for="ville in villes" :key="ville.id">
           <div>{{ ville.id }}</div>
           <div>{{ ville.nom }}</div>
           <div>{{ ville.pays }}</div>
-          <div>
-            <button @click="deleteVille(ville.id)">Supprimer</button>
-          </div>
+         
         </div>
       </div>
     </div>
@@ -41,21 +39,7 @@
         }
       };
   
-      // Fonction pour supprimer une ville
-      const deleteVille = async (id) => {
-        try {
-          const response = await fetch(`/api/villes/delete/${id}`, {
-            method: 'DELETE',
-          });
-          if (!response.ok) {
-            throw new Error('Erreur lors de la suppression de la ville');
-          }
-          // Rafraîchir la liste après suppression
-          await fetchVilles();
-        } catch (error) {
-          console.error(error);
-        }
-      };
+     
   
       // Charger les villes au montage du composant
       onMounted(() => {
@@ -64,7 +48,7 @@
   
       return {
         villes,
-        deleteVille,
+
       };
     },
   };
@@ -105,18 +89,6 @@
   .table-row:nth-child(even) {
     background-color: #f4f4f4;
   }
-  
-  button {
-    padding: 5px 10px;
-    background-color: #d9534f;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #c9302c;
-  }
+ 
   </style>
   
