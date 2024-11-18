@@ -12,7 +12,8 @@ console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
 import { createApp } from 'vue';
 import HelloWorld from './composants/test.vue';
 import GetProducts from './composants/ProductApp.vue';
-
+import GetVilles from './composants/VilleApp.vue';
 
 createApp(HelloWorld).mount('#app');
 createApp(GetProducts).mount('#app2');
+createApp(GetVilles).mount('#app3');
