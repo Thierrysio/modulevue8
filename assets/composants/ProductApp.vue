@@ -65,7 +65,7 @@
   
       const deleteProduct = async (id) => {
         try {
-          const response = await fetch(`/api/products/delete/${id}`, {
+          const response = await fetch(`/api/product/delete/${id}`, {
             method: 'DELETE',
           });
   

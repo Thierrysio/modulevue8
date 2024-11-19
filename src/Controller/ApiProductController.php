@@ -64,4 +64,19 @@ class ApiProductController extends AbstractController
        $fournisseurs = $fournisseurRepository->findAll();
        return $response->GetJsonResponse($request,$fournisseurs);
     }
+
+    #[Route('/api/product/delete/{id}', name: 'app_api_fournisseurs')]
+    public function deleteProduct(Product $product, EntityManagerInterface $entityManager)
+    {
+
+        if ($product) {
+            $entityManager->remove($product);
+            $entityManager->flush();
+
+            return new JsonResponse(['status' => 'Product deleted']);
+        }
+
+        return new JsonResponse(['status' => 'Product not found'], 404);
+    }
+
 }
