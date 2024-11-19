@@ -44,7 +44,7 @@
   
       const addProduct = async () => {
         try {
-          const response = await fetch('/api/products/add', {
+          const response = await fetch('/api/product/add', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

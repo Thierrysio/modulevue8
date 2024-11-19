@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Product;
 use App\Repository\FournisseurRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,6 +13,8 @@ use App\Repository\ProductRepository;
 use App\Repository\VilleRepository;
 
 use App\Utils\Utils;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ApiProductController extends AbstractController
 {
@@ -29,6 +32,22 @@ class ApiProductController extends AbstractController
         $response =new Utils();
        $produits = $productRepository->findAll();
        return $response->GetJsonResponse($request,$produits);
+    }
+
+    #[Route('/api/product/add', name: 'app_api_products_add')]
+    public function AddProduct(Request $request, EntityManagerInterface $entityManager ) : JsonResponse
+    {
+
+        $data = json_decode($request->getContent(), true);
+       
+       $produit = new Product();
+       $produit->setName($data['name']);
+       $produit->setDescription($data['description']);
+       $produit->setPrice($data['price']);
+
+       $entityManager->persist($produit);
+       $entityManager->flush();
+       return $this->json(['message' => 'Produit créé avec succès.'], Response::HTTP_CREATED);
     }
 
     #[Route('/api/villes', name: 'app_api_villes')]
