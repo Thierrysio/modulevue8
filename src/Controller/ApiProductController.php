@@ -78,5 +78,19 @@ class ApiProductController extends AbstractController
 
         return new JsonResponse(['status' => 'Product not found'], 404);
     }
+    #[Route('/api/product/update/{id}', name: 'app_api_products_update')]
+    public function UpdateProduct(Product $produit ,Request $request, EntityManagerInterface $entityManager ) : JsonResponse
+    {
 
+        $data = json_decode($request->getContent(), true);
+       
+      
+       $produit->setName($data['name']);
+       $produit->setDescription($data['description']);
+       $produit->setPrice($data['price']);
+
+       $entityManager->persist($produit);
+       $entityManager->flush();
+       return $this->json(['message' => 'Produit maj avec succès.'], Response::HTTP_OK);
+    }
 }
