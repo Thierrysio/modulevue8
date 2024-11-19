@@ -21,7 +21,7 @@
 
   
   <script>
-  import { ref, onMounted } from 'vue';
+  import { ref, onMounted, onUnmounted } from 'vue';
   
   export default {
     name: 'ProductApp',
@@ -34,6 +34,9 @@
       });
       const isEditing = ref(false);
       const editingProductId = ref(null);
+      const intervalId = ref(null);
+
+
   
       const fetchProducts = async () => {
         try {
@@ -128,8 +131,13 @@
       };
   
       onMounted(() => {
-        fetchProducts();
-      });
+  fetchProducts();
+  intervalId.value = setInterval(fetchProducts, 2000);
+});
+
+onUnmounted(() => {
+  clearInterval(intervalId.value);
+});
   
       return {
         products,
